@@ -1,0 +1,101 @@
+<!-- sprint 3. tp 3. Etapa 3. Requerimiento 1. -->
+ 
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <title> Crear Superhéroe</title>
+    <style> 
+        body { font-family: sans-serif; background-color: #f0f0f0; padding: 20px; }
+         /*(ajuste ancho de ventana) .form-container { display: inline-block; width: auto; max-width: 600px; background: white; padding: 20px; border: 4px double black; border-radius: 8px; margin: 20px;} */
+         .form-container { max-width: 600px; margin: 0 auto; background: white; padding: 20px; border: 1px solid #ccc; } 
+        label { display: block; margin-top: 10px; font-weight: bold; }
+        input[type="text"], input[type="number"], textarea { width: 100%; padding: 8px; margin-top: 5px; border: 1px solid #ddd; box-sizing: border-box; }
+        button { margin-top: 20px; padding: 10px 15px; background-color: #007bff; color: white; border: none; cursor: pointer; }
+    </style>
+</head>
+<body>
+    
+    <!-- sprint 3. tp 3. Etapa 3. Requerimiento 5.  -->
+   
+ <div class="form-container">
+  <h2>Agregar Nuevo Superhéroe</h2>
+
+  <form action="/api/heroes/agregar" method="POST">
+
+  <!-- validaciones tipo from, que son las q aparecen en html instantaneamente -->   
+   
+   <label>Nombre del Superhéroe:</label>
+    <input type="text" name="nombreSuperHeroe" required minlength="3" maxlength="60">
+
+    <label>Nombre Real:</label>
+    <input type="text" name="nombreReal" required minlength="3" maxlength="60">
+
+    <label>Edad:</label>
+    <input type="number" name="edad" required min="0">
+
+    <label>Planeta de Origen:</label>
+    <input type="text" name="planetaOrigen" required>
+
+    <label for="debilidad">Debilidad (separados por coma):</label>
+     <textarea id="debilidad" name="debilidad"></textarea>
+
+    <label for="poderes">Poderes (separados por coma):</label>
+    <input type="text" id="poderes" name="poderes" placeholder="Ej: volar, superfuerza, invisibilidad">
+                                                                    
+    <label for="aliados">Aliados (separados por coma):</label>
+    <input type="text" id="aliados" name="aliados" required>
+
+    <label for="enemigos">Enemigos (separados por coma):</label>
+    <input type="text" id="enemigos" name="enemigos" required>
+
+    <label for="creador"> Creador:</label>
+    <input type="text" id="creador" name="creador" required>
+
+      <!-- sprint 3. tp 3. Etapa 3. Requerimiento 6: <button type="submit">Guardar Superhéroe</button> -->
+
+   <button type="submit"
+   style="
+      margin-top: 20px;
+      padding: 8px 12px;
+      background-color: #dbeecb;   
+      color: #2f4f2f;              
+      border: 2px solid #2f4f2f;   
+      border-radius: 5px;
+      font-weight: bold;
+      cursor: pointer;
+      transition: 0.3s;
+   "
+   onmouseover="
+      this.style.backgroundColor='#2f4f2f';
+      this.style.color='white';
+   "
+   onmouseout="
+      this.style.backgroundColor='#dbeecb';
+      this.style.color='#2f4f2f';
+   "
+>
+   Guardar Superhéroe
+</button>
+
+   <a href="/api/heroes" 
+   style="
+      margin-left: 15px;
+      padding: 8px 12px;
+      background-color: #ffe6f0;
+      color: #800020;
+      border: 2px solid #800020;
+      border-radius: 5px;
+      text-decoration: none;
+      font-weight: bold;
+      transition: 0.3s;
+   "
+   onmouseover="this.style.backgroundColor='#800020'; this.style.color='white';"
+   onmouseout="this.style.backgroundColor='#ffe6f0'; this.style.color='#800020';"
+>
+   Volver
+</a>   
+ </form>
+</div>
+</body>
+</html>

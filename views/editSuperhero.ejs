@@ -1,0 +1,150 @@
+<!-- sprint 3. tp 3. Etapa 3. Requerimiento 1. -->
+
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <title>Editar Superhéroe: <%= heroe.nombreSuperHeroe %></title>
+
+    <style> 
+        body { font-family: sans-serif; background-color: #f0f0f0; padding: 20px; }
+        .form-container { max-width: 600px; margin: 0 auto; background: white; padding: 20px; border: 1px solid #ccc; }
+        label { display: block; margin-top: 10px; font-weight: bold; }
+        input[type="text"], input[type="number"], textarea { width: 100%; padding: 8px; margin-top: 5px; border: 1px solid #ddd; box-sizing: border-box; }
+        .boton-guardar {
+            margin-top: 20px;
+            padding: 10px 15px;
+            background-color: #d0ebff;  
+            color: #003366;             
+            border: 3px double #003366;  
+            border-radius: 6px;
+            font-weight: bold;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+
+        .boton-guardar:hover {
+            background-color: #003366;   
+            color: white;
+            transform: scale(1.05);
+        }
+        .error-message { color: red; margin-top: 5px; }
+    </style>
+    </head>
+<body>
+    <div class="form-container">
+        <h1>Editar Superhéroe: <%= heroe.nombreSuperHeroe %></h1>
+
+        <!-- bloque de errores generales  -->
+          <% if (typeof errores !== 'undefined') { %>
+                <div style="color: rgb(66, 40, 40); border: 1px solid red; padding: 10px; margin-bottom: 15px;">
+                    <p>Corrija los siguientes errores:</p>
+                    <ul>
+                    <% errores.forEach(error => { %>
+                        <li><%= error.msg %></li>
+                    <% }); %>
+                    </ul>
+                </div>
+            <% } %>
+      
+        <form action="/api/heroes/editar/<%= heroe._id %>?_method=PUT" method="POST">
+                    <!--para html post ya no acepta put-->
+    <!--para cumplir con 1 standard se escribe put q lo convierte en post con el método override, el servidor lo interpreta como put-->
+            <label for="nombreSuperHeroe">Nombre del Superhéroe:</label>
+            <input type="text" 
+                   id="nombreSuperHeroe" 
+                   name="nombreSuperHeroe" 
+                   required value="<%= typeof heroe.nombreSuperHeroe !== 'undefined' ? heroe.nombreSuperHeroe : '' %>">
+           
+            <!-- <%# Mensaje de error específico. %> -->
+            <% if (typeof errores !== 'undefined') { errores.forEach(error => { if (error.path === 'nombreSuperHeroe') { %>
+                <p class="error-message"><%= error.msg %></p>
+            <% }}); } %> 
+                
+            <label for="nombreReal">Nombre Real:</label>
+            <input type="text" 
+                   id="nombreReal" 
+                   name="nombreReal" 
+                   required value="<%= typeof heroe.nombreReal !== 'undefined' ? heroe.nombreReal : '' %>">
+            <% if (typeof errores !== 'undefined') { errores.forEach(error => { if (error.path === 'nombreReal') { %>
+                <p class="error-message"><%= error.msg %></p>
+            <% }}); } %>
+            
+            <label for="edad">Edad:</label>
+            <input type="number" 
+                   id="edad" 
+                   name="edad" 
+                   required value="<%= typeof heroe.edad !== 'undefined' ? heroe.edad : '' %>">
+            <% if (typeof errores !== 'undefined') { errores.forEach(error => { if (error.path === 'edad') { %>
+                <p class="error-message"><%= error.msg %></p>
+            <% }}); } %>
+            
+            <label for="planetaOrigen">Planeta de Origen:</label>
+            <input type="text" 
+                   id="planetaOrigen" 
+                   name="planetaOrigen" 
+                   required value="<%= typeof heroe.planetaOrigen !== 'undefined' ? heroe.planetaOrigen : '' %>">
+            <% if (typeof errores !== 'undefined') { errores.forEach(error => { if (error.path === 'planetaOrigen') { %>
+                <p class="error-message"><%= error.msg %></p>
+            <% }}); } %>
+                
+            <label for="debilidad">Debilidad:</label>
+            <textarea id="debilidad" name="debilidad"><%= typeof heroe.debilidad !== 'undefined' ? heroe.debilidad : '' %></textarea>
+
+            <label for="poderes">Poderes (separados por coma):</label>
+            <input type="text" 
+                   id="poderes" 
+                   name="poderes" 
+                   placeholder="Ej: volar, superfuerza, invisibilidad"
+                   value="<%= Array.isArray(heroe.poderes) ? heroe.poderes.join(', ') : '' %>">
+            
+           <label for="aliados">Aliados (separados por coma):</label>
+            <input type="text" 
+                   id="aliados" 
+                   name="aliados"
+                   value="<%= heroe.aliados ? (Array.isArray(heroe.aliados) ? heroe.aliados.join(', ') : heroe.aliados) : '' %>">
+
+            <label for="enemigos">Enemigos (separados por coma):</label>
+            <input type="text" 
+                   id="enemigos" 
+                   name="enemigos"
+                   value="<%= heroe.enemigos ? (Array.isArray(heroe.enemigos) ? heroe.enemigos.join(', ') : heroe.enemigos) : '' %>">
+          >
+
+            <label for="creador">Creador:</label>
+            <input type="text" 
+                   id="creador" 
+                   name="creador" 
+                   required value="<%= typeof heroe.creador !== 'undefined' ? heroe.creador : '' %>">
+            
+
+    <%# sprint 3. tp 3. Etapa 3. Requerimiento 6 %>
+           <button type="submit"
+                style="
+                    margin-top: 20px;
+                    padding: 8px 12px;
+                    background-color: #d0ebff;   
+                    color: #003366;              
+                    border: 2px solid #003366;   
+                    border-radius: 5px;
+                    font-weight: bold;
+                    cursor: pointer;
+                    transition: 0.3s;
+                "
+                onmouseover="
+                    this.style.backgroundColor='#003366';
+                    this.style.color='white';
+                "
+                onmouseout="
+                    this.style.backgroundColor='#d0ebff';
+                    this.style.color='#003366';
+                "
+                >
+                Guardar Cambios
+            </button>
+            <a href="/api/heroes" style="margin-left: 15px;">Cancelar</a>
+
+        </form>
+    </div>
+</body>
+</html>
