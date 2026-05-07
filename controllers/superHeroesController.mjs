@@ -1,6 +1,6 @@
 import { validationResult } from 'express-validator'; // permite encontrar errores y mostrar en la vista/redirect
 import { obtenerSuperHeroePorId, obtenerTodosLosSuperHeroes, buscarSuperHeroePorAtributo, obtenerSuperHeroesMayoresDe30, crearSuperHeroe, actualizarSuperHeroe, eliminarSuperHeroexId, eliminarSuperHeroexNombre } from '../services/superheroesServices.mjs';
-import { renderizarSuperheroe, renderizarListaSuperheroes } from '../views/responseView.mjs';                             
+import { renderizarSuperheroe, renderizarListaSuperheroes } from '../ejs-layout/views/responseView.mjs';                             
                                                             
 
 export async function obtenerSuperHeroePorIdController(req, res) {
@@ -35,7 +35,7 @@ export async function obtenerTodosLosSuperHeroesController(req, res) {
          console.log(`Cargando dashboard con ${superheroes.length} héroes`);
         // Cambie .json X .render para cargar la vista y renderizar dashbord. Mensaje exitoso
         const success = req.query.success || null;
-        res.render('dashboard', { heroes: superheroes, success }); 
+        res.render('dashboard', { title: 'Dashboard', heroes: superheroes, success }); 
     } catch (error) {
         res.status(500).send({ mensaje: 'Error al cargar el dashboard', error: error.message });
     }
@@ -138,7 +138,7 @@ export async function eliminarSuperHeroexNombreController(req, res) {
 //¿¿¿???sprint 3. tp 3. Etapa 3. Requerimiento 2 continua en routes.
 export async function rutaParaFormularioVistaAddController(req, res) {
     try {     
-        res.render('addSuperhero');        
+        res.render('addSuperhero', { title: 'Agregar Superhéroe' });        
     } catch (error) {
         res.status(500).send({ mensaje: 'Error al crear el Super Héroe', error: error.message });
     }    
@@ -163,6 +163,7 @@ export async function AgregarSuperHeroeController(req, res, next) {
     if (erroresValidacion.length > 0) {
         console.log(" Errores de validación:", erroresValidacion);
         return res.status(400).render('addSuperhero', {
+            title: 'Agregar Superhéroe',
             errores: erroresValidacion
         });
     }
@@ -210,7 +211,7 @@ export async function AgregarSuperHeroeController(req, res, next) {
         }
 
         // Renderizar el formulario de edición con los datos del héroe
-        return res.render('editSuperhero', { heroe });
+        return res.render('editSuperhero', { title: 'Editar Superhéroe', heroe });
 
         } catch (error) {
         next(error);
@@ -229,6 +230,7 @@ export async function AgregarSuperHeroeController(req, res, next) {
     if (erroresValidacion.length > 0) {
       const heroe = await obtenerSuperHeroePorId(id);
       return res.status(400).render('editSuperhero', {
+                title: 'Editar Superhéroe',
                 heroe,
                 errores: erroresValidacion,
             });

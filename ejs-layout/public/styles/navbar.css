@@ -1,0 +1,25 @@
+body{
+    margin:0;
+    padding-top:90px;
+    font-family:sans-serif;
+}
+.navbar{
+    position: fixed;
+    top: 0;
+    left: 0;
+
+    width: 100%;
+
+    background-color: #111827;
+
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+
+    padding: 15px 30px;
+
+    z-index: 1000;
+
+    box-shadow: 0 2px 8px rgba(0,0,0,0.3);
+    
+}

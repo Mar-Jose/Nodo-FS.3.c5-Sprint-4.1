@@ -20,13 +20,25 @@ const __dirname = path.dirname(__filename);
 
 // Configura EJS como motor de vistas en Extress. Sprint 3. tp 3. Etapa 2. Requerimiento 1.
 app.set('view engine', 'ejs');
-//Configura EJS como el motor de vistas en Extress. Sprint 3. tp 3. Etapa 2. Requerimiento 1.
-app.set('views', path.join(import.meta.dirname, 'ejs.layout', 'views'));
+//Configura EJS como el directorio de vistas en Extress. Sprint 3. tp 3.
+// En el ejemplo práctico: app.set('views', path.join(import.meta.dirname, 'ejs.layout', 'views'));
+app.set('views', path.join(__dirname, 'ejs-layout', 'views'));
+
+app.use(methodOverride('_method'));
+
+// Middleware para parsear JSON:
+app.use(express.json());
+app.use(express.urlencoded({ extended: true }));
+app.use(express.static(path.join(__dirname, 'public'))); //permite usar imagenes, css, js.
+
+// Conexión a MongoDB:
+connectDB();
+
 // configurar express-ejs-layouts.  Sprint 4.1 
 app.use(expressLayouts);
 app.set('layout', 'layout'); // archivo base de layout.  Sprint 4.1 
 // configurar la carpeta de archivos estáticos.  Sprint 4.1 
-app.use(express.static(path.join(import.meta.dirname, 'public')));
+    app.use(express.static(path.join(__dirname, 'public')));
 
 const navbarLinks = [
     { text: 'Inicio', href: '/', icon: '/icons/home.svg' },
@@ -34,6 +46,9 @@ const navbarLinks = [
     { text: 'Contacto', href: '/contact', icon: '/icons/contact.svg' }
 ];
 app.locals.navbarLinks = navbarLinks;
+
+// Configuración de rutas:
+app.use('/api', superHeroRoutes);
 
 // Ruta principal. Renderiza la vista index.ejs- Sprint 4.1 
 app.get('/', (req, res) => {
