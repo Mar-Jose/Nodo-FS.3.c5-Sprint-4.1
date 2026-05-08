@@ -37,8 +37,8 @@ const router = express.Router();
 
 router.get('/heroes', obtenerTodosLosSuperHeroesController);
 // sprint 4.
+router.get('/heroes/buscar', buscarSuperheroesPorAtributoController);
 router.get('/heroes/mostrar', mostrarVistaBusquedaController);
-router.get('/heroes/buscar/:atributo/:valor', buscarSuperheroesPorAtributoController);
 
 //sprint 3. tp 3. Etapa 3. Requerimiento 2 finaliza aquí en routes. Crea el endpoint:
 router.get('/heroes/nuevo', rutaParaFormularioVistaAddController);
@@ -61,7 +61,7 @@ router.get('/heroes/:id', obtenerSuperHeroePorIdController);
 
 export default router;
 
-
+//router.get('/heroes/buscar/:atributo/:valor', buscarSuperheroesPorAtributoController);
 //router.get('/heroes/mayores-30', obtenerSuperHeroesMayoresDe30Controller);
 
 //Requerimientos del sprint 3. tp 1:
