@@ -29,7 +29,7 @@ app.use(methodOverride('_method'));
 // Middleware para parsear JSON:
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
-app.use(express.static(path.join(__dirname, 'public'))); //permite usar imagenes, css, js.
+app.use(express.static(path.join(__dirname, 'ejs-layout', 'public'))); //permite usar imagenes, css, js.
 
 // Conexión a MongoDB:
 connectDB();
@@ -37,8 +37,8 @@ connectDB();
 // configurar express-ejs-layouts.  Sprint 4.1 
 app.use(expressLayouts);
 app.set('layout', 'layout'); // archivo base de layout.  Sprint 4.1 
-// configurar la carpeta de archivos estáticos.  Sprint 4.1 
-    app.use(express.static(path.join(__dirname, 'public')));
+// La carpeta de archivos estáticos está dentro de ejs-layout/public.
+// Ya está configurada arriba.
 
 const navbarLinks = [
     { text: 'Inicio', href: '/', icon: '/icons/home.svg' },

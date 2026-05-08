@@ -2,7 +2,7 @@ import express from 'express';
 import {
     obtenerSuperHeroePorIdController,
     obtenerTodosLosSuperHeroesController,
-    //buscarSuperheroesPorAtributoController,
+    buscarSuperheroesPorAtributoController,
     //obtenerSuperHeroesMayoresDe30Controller,
     //***Requerimientos del sprint 3. tp 1:
     crearSuperHeroeController,
@@ -19,6 +19,8 @@ import {
 
      //Sprint 3. tp 3 Etapa 5. 
      eliminarSuperheroeController,
+     // Sprint 4. tp 1.
+     mostrarVistaBusquedaController,
 } from '../controllers/superHeroesController.mjs';
 
     // sprint 3. Tp 2:
@@ -34,11 +36,15 @@ import {
 const router = express.Router();
 
 router.get('/heroes', obtenerTodosLosSuperHeroesController);
+// sprint 4.
+router.get('/heroes/mostrar', mostrarVistaBusquedaController);
+router.get('/heroes/buscar/:atributo/:valor', buscarSuperheroesPorAtributoController);
 
 //sprint 3. tp 3. Etapa 3. Requerimiento 2 finaliza aquí en routes. Crea el endpoint:
 router.get('/heroes/nuevo', rutaParaFormularioVistaAddController);
 //sprint 3. tp 3. Etapa 3. Requerimiento 3.
 router.post('/heroes/agregar', superheroeValidations, validate, AgregarSuperHeroeController); 
+
 //sprint 3. tp 3. Etapa 4. Requerimiento 2.
 // se renderiza la vista de editsupehero en este endpoint, 
 // se muestra el formulario con los datos del superheroe a editar.
@@ -52,10 +58,10 @@ router.delete('/heroes/id/:id', eliminarSuperheroeController);
 
 router.get('/heroes/:id', obtenerSuperHeroePorIdController);
 
+
 export default router;
 
 
-//router.get('/heroes/buscar/:atributo/:valor', buscarSuperheroesPorAtributoController);
 //router.get('/heroes/mayores-30', obtenerSuperHeroesMayoresDe30Controller);
 
 //Requerimientos del sprint 3. tp 1:

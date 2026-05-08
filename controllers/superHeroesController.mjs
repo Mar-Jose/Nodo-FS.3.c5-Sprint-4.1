@@ -40,17 +40,41 @@ export async function obtenerTodosLosSuperHeroesController(req, res) {
         res.status(500).send({ mensaje: 'Error al cargar el dashboard', error: error.message });
     }
 }
-   
+   export async function mostrarVistaBusquedaController(req, res) {
+    try {
+
+        res.render('searchHero', {
+            title: 'Buscar Superhéroes'
+        });
+
+    } catch (error) {
+
+        res.status(500).send({
+            mensaje: 'Error al cargar búsqueda',
+            error: error.message
+        });
+
+    }
+}
 
 export async function buscarSuperheroesPorAtributoController(req, res) {
     try {
-        const { atributo, valor } = req.params;
+        const { atributo, valor } = req.query;   // cambié params x "query" para recibir datos del formulario-búsqueda.
         const superheroes = await  buscarSuperHeroePorAtributo(atributo, valor);
         if (superheroes.length === 0) {
             return res.status(404).send({ mensaje: 'No se encontraron superhéroes con ese atributo' });
-        }                          
-        const superheroesFormateados = renderizarListaSuperheroes(superheroes);
+        }   
+
+       // Sprint 4.1  
+           res.render('dashboard', {
+            title: 'Resultados',
+            heroes: superheroes,
+            success: null
+        });                   
+     // Cambié .json x .render para cargar la vista y renderizar resultados de búsqueda. Mensaje exitoso 
+       /* const superheroesFormateados = renderizarListaSuperheroes(superheroes);
             return res.status(200).json(superheroesFormateados);
+        */
     } catch (error) {
             return res.status(500).send({ mensaje: 'Error al buscar los superhéroes', error: error.message });
     }

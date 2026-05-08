@@ -1,0 +1,25 @@
+<h1>Buscar Superhéroes</h1>
+
+<form action="/api/heroes/mostrar" method="GET">
+
+    <label>Atributo:</label>
+
+    <select name="atributo">
+        <option value="nombreSuperHeroe">Nombre</option>
+        <option value="nombreReal">Nombre Real</option>
+        <option value="edad">Edad</option>
+        <option value="planetaOrigen">Planeta</option>
+        <option value="debilidad">debilidad</option>
+        <option value="poderes">poderes</option>
+        <option value="aliados">aliados</option>
+        <option value="enemigos">enemigos</option>
+        <option value="creador">Creador</option>
+    </select>
+
+    <label>Valor:</label>
+
+    <input type="text" name="valor">
+
+    <button type="submit">Buscar</button>
+
+</form>
