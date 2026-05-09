@@ -41,16 +41,16 @@
      <textarea id="debilidad" name="debilidad"></textarea>
 
     <label for="poderes">Poderes (separados por coma):</label>
-    <input type="text" id="poderes" name="poderes" placeholder="Ej: volar, superfuerza, invisibilidad">
+    <input type="text" id="poderes" name="poderes" placeholder="Ej: volar, superfuerza, invisibilidad"  required minlength="3" maxlength="60" .split(',').map(p => p.trim())>
                                                                     
     <label for="aliados">Aliados (separados por coma):</label>
-    <input type="text" id="aliados" name="aliados" required>
+    <input type="text" id="aliados" name="aliados" required minlength="3" maxlength="60">
 
     <label for="enemigos">Enemigos (separados por coma):</label>
-    <input type="text" id="enemigos" name="enemigos" required>
+    <input type="text" id="enemigos" name="enemigos" required minlength="3" maxlength="60">
 
     <label for="creador"> Creador:</label>
-    <input type="text" id="creador" name="creador" required>
+    <input type="text" id="creador" name="creador" required minlength="3" maxlength="60">
 
       <!-- sprint 3. tp 3. Etapa 3. Requerimiento 6: <button type="submit">Guardar Superhéroe</button> -->
 

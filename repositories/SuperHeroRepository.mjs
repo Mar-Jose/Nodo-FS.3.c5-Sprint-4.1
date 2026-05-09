@@ -31,7 +31,7 @@ class SuperHeroRepository extends IRepository {
   async actualizarHeroe (id, valor) {
      console.log("estoy capa Repo-f-actualizar");
      console.log("actualizar valor: " +valor);
-    return await superHero.findByIdAndUpdate(id, valor, { new: true });
+    return await superHero.findByIdAndUpdate(id, valor, { returnDocument: 'after' });
    
   }
 
